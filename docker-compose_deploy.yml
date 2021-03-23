@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  jenkins:
+    image: jenkins_with_plugins:latest
+    container_name: jenkins
+    user: root    
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      JENKINS_HOST_HOME: "./data/jenkins"      
+    ports:
+      - "8088:8080"
+      - "5000:5000"
+    #command: bash -c "git config --global http.sslverify false"
+
+volumes:
+   jenkins_home:
