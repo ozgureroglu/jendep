@@ -3,7 +3,7 @@ services:
   jenkins:
     build:
        context: .
-    image: jenkins_with_plugins:latest
+    image: jenkins_test:latest
     container_name: jenkins
     user: root    
     volumes:
@@ -14,7 +14,7 @@ services:
     ports: 
       - "8088:8080"
       - "5000:5000"
-    #command: bash -c "git config --global http.sslverify false"
+
 
 volumes:
    jenkins_home:

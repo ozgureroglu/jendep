@@ -24,6 +24,7 @@ COPY jenkins-user.txt /run/secrets/jenkins-user.txt
 COPY security.groovy /usr/share/jenkins/ref/init.groovy.d/security.groovy
 COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+COPY ssh.tgz /root/
 
 
 # jenkins user after the task
@@ -31,3 +32,10 @@ USER jenkins
 RUN jenkins-plugin-cli --plugins -f /usr/share/jenkins/ref/plugins.txt
 USER root
 RUN git config --global http.sslverify false
+RUN cd /root/ && tar -xvf ssh.tgz && rm ssh.tgz
+
+COPY credentials.tgz /usr/share/jenkins/ref/
+COPY full.tar /usr/share/jenkins/ref/
+RUN cd /usr/share/jenkins/ref/ && tar -xvf credentials.tgz && mkdir jenkins-backup && mv full.tar jenkins-backup && cd jenkins-backup && tar -xvf full.tar
+
+
