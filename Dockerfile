@@ -36,6 +36,6 @@ RUN cd /root/ && tar -xvf ssh.tgz && rm ssh.tgz
 
 COPY credentials.tgz /usr/share/jenkins/ref/
 COPY full.tar /usr/share/jenkins/ref/
-RUN cd /usr/share/jenkins/ref/ && tar -xvf credentials.tgz && mkdir jenkins-backup && mv full.tar jenkins-backup && cd jenkins-backup && tar -xvf full.tar
-
+RUN cd /usr/share/jenkins/ref/ && tar -xvf credentials.tgz && rm -rf credentials.tgz && mkdir jenkins-backup && mv full.tar jenkins-backup && cd jenkins-backup && tar -xvf full.tar
+RUN ln -s /var/jenkins_home /var/lib/jenkins
 
